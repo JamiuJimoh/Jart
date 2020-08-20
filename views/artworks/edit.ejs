@@ -1,0 +1,21 @@
+<%-include("../partials/header")%>
+<h1 id="segment">Share Your Jart</h1>
+<div id="form" class="ui container">
+    <form class="ui form" action="/artworks/<%=artwork._id%>?_method=PUT" method="POST">
+        <div class="field" >
+            <label for="">Title</label>
+            <input name="artwork[title]" type="text" value="<%=artwork.title%>">
+        </div>
+        <div class="field" >
+            <label for="">Image</label>
+            <input name="artwork[image]" type="text" value="<%=artwork.image%>">
+        </div>
+        <div class="field" >
+            <label for="">About</label>
+            <textarea name="artwork[content]" id="" cols="30" rows="10"><%=artwork.content%></textarea>
+        </div>
+        <button type="submit" class="ui orange button">Update</button>
+    </form>
+</div>
+
+<%-include("../partials/footer")%>

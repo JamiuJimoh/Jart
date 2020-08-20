@@ -1,0 +1,62 @@
+<%-include("../partials/header")%>
+
+<div class="ui container" >
+    <div class="ui stackable six column grid" id="ui-container">
+        <div class="three wide column" id="bottom">
+        kjhfk
+        nkngkrgj
+        dksbkjd
+        skdnskdj
+        skdjbskd
+        lkfnf
+
+        </div>
+
+        <div class="thirteen wide column" id="container-div">
+            <div class="ui raised text container segment" id="post-container">
+                <img class="ui fluid image" id="show-image" src="<%=foundArtwork.image%>" alt="">
+                <div id="container">
+                    <h1 class="ui header"><%=foundArtwork.title%></h1>
+                    <%=foundArtwork.content%>
+                    <a href="/artworks/<%=foundArtwork.id%>/edit" class="ui orange button">Edit</a>
+                    <form action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
+                        <button type="submit" class="ui red button">delete</button>
+                    </form>
+                </div>
+            </div>
+                    
+            <div class="ui raised text container segment" id="post-container">
+                <div id="container">
+                    <form  class="ui form" action="/artworks/<%=foundArtwork.id%>/comments" method="POST">
+                        <div class="field">
+                            <textarea class="textarea"  name="comment[text]" id="" cols="30" rows="10" placeholder="Write a comment..."></textarea>
+                        </div>
+                        <div>
+                            <button class="ui  button" type="submit">Comment</button>
+                        </div>
+                    </form>
+                    <div class="ui comments">
+                        <div class="comment">
+                            <a href="" class="avatar">
+                                <img src="/images/avatar/small/matt.jpg">
+                            </a>
+                            <div class="content">
+                                <% foundArtwork.comments.forEach(comment=>{%>       
+                                    <a href="" class="author"><%=comment.author%></a>
+                                    <div class="metadata">
+                                        <span class="date">5:00pm</span>
+                                    </div>
+                                    <div class="text">
+                                        <%=comment.text%>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include("../partials/footer")%>
