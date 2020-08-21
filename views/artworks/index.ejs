@@ -32,8 +32,8 @@
                         <div class="top aligned individual post">
                             <h1 class="ui header"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h1>
                             <h3><%=artwork.content.substring(0, 30)%> ...</h3>
-                            <p>By <%=artwork.author %></p>
-                            <p>Posted <%=artwork.createdAt.default%></p>
+                            <em><p>By <%=artwork.author.username %></p></em>
+                            <!-- <p>Posted <%=artwork.createdAt%></p> -->
                         </div>
                     </div>
                 </div>

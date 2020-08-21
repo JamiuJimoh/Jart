@@ -22,6 +22,7 @@
                     <form action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
                         <button type="submit" class="ui red button">delete</button>
                     </form>
+                    <em><p>Posted by <%=foundArtwork.author.username%></p></em>
                 </div>
             </div>
                     
@@ -29,10 +30,14 @@
                 <div id="container">
                     <form  class="ui form" action="/artworks/<%=foundArtwork.id%>/comments" method="POST">
                         <div class="field">
-                            <textarea class="textarea"  name="comment[text]" id="" cols="30" rows="10" placeholder="Write a comment..."></textarea>
-                        </div>
-                        <div>
-                            <button class="ui  button" type="submit">Comment</button>
+                            <% if(currUser){ %>
+                                <textarea class="textarea"  name="comment[text]" id="" cols="30" rows="10" placeholder="Write a comment..."></textarea>
+                                    <div>
+                                        <button class="ui  button" type="submit">Comment</button>
+                                    </div>
+                            <% }else{%>
+                                <div></div>
+                            <% } %>
                         </div>
                     </form>
                     <div class="ui comments">
@@ -42,7 +47,7 @@
                             </a>
                             <div class="content">
                                 <% foundArtwork.comments.forEach(comment=>{%>       
-                                    <a href="" class="author"><%=comment.author%></a>
+                                    <a href="" class="author"><%=comment.author.username%></a>
                                     <div class="metadata">
                                         <span class="date">5:00pm</span>
                                     </div>

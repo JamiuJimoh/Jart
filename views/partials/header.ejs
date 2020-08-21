@@ -19,9 +19,13 @@
                 Home
             </a>
             <div class="right item">
-                <a href="/register" class="item"> Sign Up</a>
-                <a href="/login" class="item"> Login</a>
-                <a href="/logout" class="item">Logout</a>
+                <% if(!currUser){ %>
+                    <a href="/login" class="item"> Login</a>
+                    <a href="/register" class="item"> Sign Up</a>
+                <% }else{ %>
+                    <a href="">Signed In As <%=currUser.username%></a>
+                    <a href="/logout" class="item">Logout</a>
+                <% } %>
                 <i onclick="toggleHamburger()" class="fas fa-hamburger fa-2x"></i>
             </div>
         </div>
