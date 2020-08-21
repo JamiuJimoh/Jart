@@ -17,11 +17,13 @@
                 <img class="ui fluid image" id="show-image" src="<%=foundArtwork.image%>" alt="">
                 <div id="container">
                     <h1 class="ui header"><%=foundArtwork.title%></h1>
-                    <%=foundArtwork.content%>
-                    <a href="/artworks/<%=foundArtwork.id%>/edit" class="ui orange button">Edit</a>
-                    <form action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
-                        <button type="submit" class="ui red button">delete</button>
-                    </form>
+                    <p><%=foundArtwork.content%></p>
+                    <% if( currUser && foundArtwork.author.id.equals(currUser._id)){ %>
+                        <a href="/artworks/<%=foundArtwork.id%>/edit" class="ui orange button">Edit</a>
+                        <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
+                            <button type="submit" class="ui red button">Delete</button>
+                        </form>
+                    <% } %>
                     <em><p>Posted by <%=foundArtwork.author.username%></p></em>
                 </div>
             </div>
@@ -54,6 +56,7 @@
                                     <div class="text">
                                         <%=comment.text%>
                                     </div>
+                                    <a class="ui small orange button" href="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>/edit">Edit</a>
                                 <% }) %>
                             </div>
                         </div>

@@ -76,6 +76,10 @@ textarea.textarea {
 	height: 120px;
 }
 
+.inline-btn {
+	display: inline;
+}
+
 /* .btn {
 	display: flex;
 	align-self: start;

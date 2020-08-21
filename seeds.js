@@ -29,6 +29,7 @@ const removeArtworks = async () => {
 	/////Remove all Artworks/////
 	try {
 		await Artwork.deleteMany({});
+		await Comment.deleteMany({});
 		console.log('removed Artworks');
 	} catch (err) {
 		console.log(err);

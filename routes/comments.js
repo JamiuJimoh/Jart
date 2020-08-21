@@ -24,6 +24,10 @@ router.post('/artworks/:id/comments', isLoggedIn, async (req, res) => {
 	}
 });
 
+router.get('/artworks/:id/comments/:comment_id/edit', async (req, res) => {
+	res.redirect('back');
+});
+
 // //////middleware
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {

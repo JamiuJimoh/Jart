@@ -1,6 +1,6 @@
 //jshint esversion:8
 const mongoose = require('mongoose');
-const comment = require('./comment');
+const Comment = require('./comment');
 const artworkSchema = new mongoose.Schema({
 	title: String,
 	image: String,
