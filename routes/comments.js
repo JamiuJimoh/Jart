@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 const Artwork = require('../models/artwork');
 const Comment = require('../models/comment');
+const middleware = require('../middleware');
 
-router.post('/artworks/:id/comments', isLoggedIn, async (req, res) => {
+router.post('/artworks/:id/comments', middleware.isLoggedIn, async (req, res) => {
 	const id = req.params.id;
 	try {
 		const artwork = await Artwork.findById(id);
@@ -24,16 +25,31 @@ router.post('/artworks/:id/comments', isLoggedIn, async (req, res) => {
 	}
 });
 
-router.get('/artworks/:id/comments/:comment_id/edit', async (req, res) => {
-	res.redirect('back');
+router.get('/artworks/:id/comments/:comment_id/edit', middleware.checkCommentOwnership, async (req, res) => {
+	try {
+		const foundComment = await Comment.findById(req.params.comment_id);
+		res.render('comments/edit', { foundArtwork_id: req.params.id, comment: foundComment });
+	} catch (err) {
+		res.redirect('back');
+	}
 });
 
-// //////middleware
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
+router.put('/artworks/:id/comments/:comment_id', middleware.checkCommentOwnership, async (req, res) => {
+	try {
+		await Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment);
+		res.redirect(`/artworks/${req.params.id}`);
+	} catch (err) {
+		res.redirect('back');
 	}
-	res.redirect('/login');
-}
+});
+
+router.delete('/artworks/:id/comments/:comment_id', middleware.checkCommentOwnership, async (req, res) => {
+	try {
+		await Comment.findByIdAndDelete(req.params.comment_id);
+		res.redirect(`/artworks/${req.params.id}`);
+	} catch (err) {
+		res.redirect('back');
+	}
+});
 
 module.exports = router;

@@ -2,7 +2,7 @@
 const Artwork = require('./models/artwork');
 const Comment = require('./models/comment');
 
-const data = [
+const seeds = [
 	{
 		title: 'Soul Gaze',
 		image: 'https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__340.jpg',
@@ -29,27 +29,24 @@ const removeArtworks = async () => {
 	/////Remove all Artworks/////
 	try {
 		await Artwork.deleteMany({});
-		await Comment.deleteMany({});
 		console.log('removed Artworks');
+		await Comment.deleteMany({});
+		console.log('removed Comments');
+		// for (let seed of seeds) {
+		// 	const artwork = await Artwork.create(seed);
+		// 	console.log('added an artwork');
+		// 	const comment = await Comment.create({
+		// 		text: 'Such a great art, Love it',
+		// 		author: 'Homer'
+		// 	});
+		// 	console.log('added new comment');
+		// 	artwork.comments.push(comment);
+		// 	artwork.save();
+		// 	console.log('added new comment to artwork');
+		// }
 	} catch (err) {
 		console.log(err);
 	}
-
-	data.forEach(async (seed) => {
-		try {
-			const artwork = await Artwork.create(seed);
-			console.log('added an artwork');
-			const comment = await Comment.create({
-				text: 'Such a great art, Love it',
-				author: 'Homer'
-			});
-			artwork.comments.push(comment);
-			artwork.save();
-			console.log('added new comment');
-		} catch (err) {
-			console.log(err);
-		}
-	});
 };
 
 module.exports = removeArtworks;

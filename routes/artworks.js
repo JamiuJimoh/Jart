@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 const Artwork = require('../models/artwork');
+const Comment = require('../models/comment');
+const middleware = require('../middleware');
 
 router.get('/artworks', async (req, res) => {
 	try {
@@ -12,11 +14,11 @@ router.get('/artworks', async (req, res) => {
 	}
 });
 
-router.get('/artworks/new', isLoggedIn, (req, res) => {
+router.get('/artworks/new', middleware.isLoggedIn, (req, res) => {
 	res.render('artworks/new');
 });
 
-router.post('/artworks', isLoggedIn, async (req, res) => {
+router.post('/artworks', middleware.isLoggedIn, async (req, res) => {
 	const title = req.body.title;
 	const image = req.body.image;
 	const content = req.body.content;
@@ -48,7 +50,7 @@ router.get('/artworks/:id', async (req, res) => {
 	}
 });
 
-router.get('/artworks/:id/edit', checkArtworkOwnership, async (req, res) => {
+router.get('/artworks/:id/edit', middleware.checkArtworkOwnership, async (req, res) => {
 	const id = req.params.id;
 	try {
 		const artwork = await Artwork.findById(id);
@@ -59,7 +61,7 @@ router.get('/artworks/:id/edit', checkArtworkOwnership, async (req, res) => {
 	}
 });
 
-router.put('/artworks/:id', checkArtworkOwnership, async (req, res) => {
+router.put('/artworks/:id', middleware.checkArtworkOwnership, async (req, res) => {
 	const id = req.params.id;
 	try {
 		await Artwork.findByIdAndUpdate(id, req.body.artwork);
@@ -69,7 +71,7 @@ router.put('/artworks/:id', checkArtworkOwnership, async (req, res) => {
 	}
 });
 
-router.delete('/artworks/:id', checkArtworkOwnership, async (req, res) => {
+router.delete('/artworks/:id', middleware.checkArtworkOwnership, async (req, res) => {
 	const id = req.params.id;
 	try {
 		const deletedArtwork = await Artwork.findByIdAndDelete(id);
@@ -79,33 +81,5 @@ router.delete('/artworks/:id', checkArtworkOwnership, async (req, res) => {
 		console.log(err);
 	}
 });
-
-////////middleware
-
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-	res.redirect('/login');
-}
-
-async function checkArtworkOwnership(req, res, next) {
-	if (req.isAuthenticated()) {
-		const id = req.params.id;
-		try {
-			const artwork = await Artwork.findById(id);
-			if (artwork.author.id.equals(req.user._id)) {
-				next();
-			} else {
-				res.redirect('back');
-			}
-		} catch (err) {
-			console.log(err);
-			res.redirect('back');
-		}
-	} else {
-		res.redirect('back');
-	}
-}
 
 module.exports = router;

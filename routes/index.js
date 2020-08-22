@@ -1,4 +1,5 @@
 //jshint esversion:8
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -19,7 +20,11 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
 	const newUser = new User({ username: req.body.username });
 	const password = req.body.password;
+	const adminCode = req.body.adminCode;
 	try {
+		if (adminCode === process.env.ADMINCODE) {
+			newUser.isAdmin = true;
+		}
 		await User.register(newUser, password);
 		await passport.authenticate('local', (req, res));
 		res.redirect('/artworks');
