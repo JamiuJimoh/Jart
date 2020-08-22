@@ -1,6 +1,5 @@
 //jshint esversion:8
 const mongoose = require('mongoose');
-const Comment = require('./comment');
 const artworkSchema = new mongoose.Schema({
 	title: String,
 	image: String,
@@ -12,11 +11,17 @@ const artworkSchema = new mongoose.Schema({
 		},
 		username: String
 	},
-	createdAt: { type: Date, default: Date.now() },
+	createdAt: { type: Date, default: Date.now },
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Comment'
+		}
+	],
+	likes: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
 		}
 	]
 });

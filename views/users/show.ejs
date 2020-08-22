@@ -1,0 +1,33 @@
+<%-include("../partials/header") %>
+
+<div class="ui container segment">
+    <div class="top aligned image">
+        <img class="ui medium circular image" src="<%=user.avatar%>" alt="">
+    <!-- </div> -->
+    <!-- <div class="top aligned individual post"> -->
+        <h1><%=user.firstName%> <%=user.lastName%>(<%=user.username%>)</h1>
+    </div>
+</div>
+
+<h1><%=user.username%>'s posts</h1>
+<% artworks.forEach(artwork=>{ %>
+    <div class="ui container">
+        <div class="ui raised segments" id="post-container">
+            <div class="ui segment">
+                <div class="ui top aligned small image">
+                    <a href="/artworks/<%=artwork._id%>" class="ui medium image">
+                        <img src="<%=artwork.image%>">
+                    </a>
+                  </div>
+                <div class="top aligned individual post">
+                    <h1 class="ui header"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h1>
+                    <h3><%=artwork.content.substring(0, 30)%> ...</h3>
+                    <em><p>By <%=artwork.author.username %></p></em>
+                    <!-- <p>Posted <%=artwork.createdAt%></p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>
+
+<%-include("../partials/footer") %>

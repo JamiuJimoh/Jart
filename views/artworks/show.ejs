@@ -1,72 +1,87 @@
 <%-include("../partials/header")%>
 
 <div class="ui container" >
-    <div class="ui stackable six column grid" id="ui-container">
-        <div class="three wide column" id="bottom">
-        kjhfk
-        nkngkrgj
-        dksbkjd
-        skdnskdj
-        skdjbskd
-        lkfnf
+    <div class="ui raised text container segment" id="post-container">
+        <img class="ui fluid image" id="show-image" src="<%=foundArtwork.image%>" alt="">
+        <div id="container">
+            <h1 class="ui header"><%=foundArtwork.title%></h1>
+            <p><%=foundArtwork.content%></p>
 
-        </div>
-
-        <div class="thirteen wide column" id="container-div">
-            <div class="ui raised text container segment" id="post-container">
-                <img class="ui fluid image" id="show-image" src="<%=foundArtwork.image%>" alt="">
-                <div id="container">
-                    <h1 class="ui header"><%=foundArtwork.title%></h1>
-                    <p><%=foundArtwork.content%></p>
-                    <% if( currUser && foundArtwork.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
-                        <a href="/artworks/<%=foundArtwork.id%>/edit" class="ui orange button">Edit</a>
-                        <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
-                            <button type="submit" class="ui red button">Delete</button>
-                        </form>
-                    <% } %>
-                    <em><p>Posted by <%=foundArtwork.author.username%></p></em>
-                </div>
-            </div>
-                    
-            <div class="ui raised text container segment" id="post-container">
-                <div id="container">
-                    <form  class="ui form" action="/artworks/<%=foundArtwork.id%>/comments" method="POST">
-                        <div class="field">
-                            <% if(currUser){ %>
-                                <textarea class="textarea"  name="comment[text]" id="" cols="30" rows="10" placeholder="Write a comment..."></textarea>
-                                    <div>
-                                        <button class="ui  button" type="submit">Comment</button>
-                                    </div>
-                            <% }else{%>
-                                <div></div>
-                            <% } %>
-                        </div>
-                    </form>
-                    <div class="ui comments">
-                        <div class="comment">
-                            <div class="content">
-                                <% foundArtwork.comments.forEach(comment=>{%>  
-                                    <div class="ui container segment">
-                                        <a href="" class="avatar">
-                                            <img src="/images/avatar/small/matt.jpg">
-                                        </a>
-                                        <a href="" class="author"><%=comment.author.username%></a>
-                                        <div class="metadata">
-                                            <span class="date">5:00pm</span>
-                                        </div>
-                                        <div class="text">
-                                            <%=comment.text%>
-                                        </div>
-                                        <% if( currUser && comment.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
-                                        <a class="ui small orange button" href="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>/edit">Edit</a>
-                                        <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                            <button class="ui small red button" type="submit" href="">Delete</button>
-                                        </form>
-                                        <% } %>
-                                    </div>     
-                                <% }) %>
+            <div style="padding-bottom: 10px;">
+                <form action="/artworks/<%= foundArtwork._id %>/like" method="POST">
+                    <div class="btn-group">
+                        <% if (currUser && foundArtwork.likes.some(function (like) {
+                            return like.equals(currUser._id)
+                        })) { %>
+                            <div class="ui labeled button" tabindex="0">
+                                <button class="ui red button">
+                                    <i class="heart icon"></i></i> 
+                                </button>
+                                <a class="ui basic red left pointing label">
+                                    Liked (<%= foundArtwork.likes.length %>)
+                                </a>
                             </div>
-                        </div>
+                        <% } else { %>
+                            <div class="ui labeled button" tabindex="0">
+                                <button class="ui white button">
+                                    <i class="heart outline icon"></i>
+                                </button>
+                                <a class="ui basic red left pointing label">
+                                    Like (<%= foundArtwork.likes.length %>)
+                                </a>
+                            </div>
+                        <% } %>
+                    </div>
+                </form>
+            </div>
+
+            <% if( currUser && foundArtwork.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
+                <a href="/artworks/<%=foundArtwork.id%>/edit" class="ui orange button">Edit</a>
+                <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>?_method=DELETE" method="POST">
+                    <button type="submit" class="ui red button">Delete</button>
+                </form>
+            <% } %>
+            <em><p>Posted by <a href="/users/<%=foundArtwork.author.id%>"><%=foundArtwork.author.username%></a>, <%= moment(foundArtwork.createdAt).fromNow() %></p></em>
+        </div>
+    </div>
+                    
+    <div class="ui raised text container segment" id="post-container">
+        <div id="container">
+            <form  class="ui form" action="/artworks/<%=foundArtwork.id%>/comments" method="POST">
+                <div class="field">
+                    <% if(currUser){ %>
+                        <textarea class="textarea"  name="comment[text]" id="" cols="30" rows="10" placeholder="Write a comment..."></textarea>
+                            <div>
+                                <button class="ui  button" type="submit">Comment</button>
+                            </div>
+                    <% }else{%>
+                        <div></div>
+                    <% } %>
+                </div>
+            </form>
+            <div class="ui comments">
+                <div class="comment">
+                    <div class="content">
+                        <% foundArtwork.comments.forEach(comment=>{%>  
+                            <div class="ui container segment">
+                                <a href="" class="avatar">
+                                    <img src="/images/avatar/small/matt.jpg">
+                                </a>
+                                <a href="" class="author"><%=comment.author.username%></a>
+                                <div class="metadata">
+                                    <span class="date"><%= moment(comment.createdAt).fromNow()%></span>
+                                </div>
+                                <div class="text">
+                                    <%=comment.text%>
+                                </div>
+                                <% if( currUser && comment.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
+                                <a class="ui small orange button" href="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                                <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                    <button class="ui small red button" type="submit" href="">Delete</button>
+                                </form>
+                                <% } %>
+                            </div>     
+                        <% }) %>
                     </div>
                 </div>
             </div>

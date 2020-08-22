@@ -1,9 +1,34 @@
 <%-include("./partials/header") %>
 
 <form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="password" name="adminCode" placeholder="Admin Code">
+    <div>
+        <label for="">First Name</label>
+        <input type="text" name="firstName" placeholder="first name">
+    </div>
+    <div>
+        <label for="">Last Name</label>
+        <input type="text" name="lastName" placeholder="last name">
+    </div>
+    <div>
+        <label for="">Username</label>
+        <input type="text" name="username" placeholder="username">
+    </div>
+    <div>
+        <label for="">Email</label>
+        <input type="email" name="email" placeholder="john@doe.com">
+    </div>
+    <div>
+        <label for="">Avatar Image</label>
+        <input type="text" name="avatar" placeholder="avatar image">
+    </div>
+    <div>
+        <label for="">Password</label>
+        <input type="password" name="password" placeholder="password">
+    </div>
+    <div>
+        <label for="">Admin Code (only for admins)</label>
+        <input type="password" name="adminCode" placeholder="Admin Code">
+    </div>
     <button>Sign Up</button>
 </form>
 

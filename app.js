@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const moment = require('moment');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -32,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 app.use(methodOverride('_method'));
+app.locals.moment = require('moment');
 
 ///////////////PASSPORT CONFIGURATION////////////
 app.use(

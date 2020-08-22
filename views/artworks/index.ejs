@@ -34,6 +34,13 @@
                             <h3><%=artwork.content.substring(0, 30)%> ...</h3>
                             <em><p>By <%=artwork.author.username %></p></em>
                             <!-- <p>Posted <%=artwork.createdAt%></p> -->
+                            <% if(artwork.likes.length < 2){ %>
+                                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
+                                <span><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
+                            <% }else{ %>
+                                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
+                                <span><i class="far fa-comments"></i> <%= artwork.comments.length %> comments </span> 
+                            <% } %>
                         </div>
                     </div>
                 </div>
