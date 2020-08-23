@@ -3,31 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" integrity="sha512-ADrqa2PY1TZtb/MoLZIZu/Z/LlPaWQeDMBV73EMwjGam43/JJ5fqW38Rq8LJOVGCDfrJeOMS3Q/wRUVzW5DkjQ==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Jart</title>
 </head>
 <body>
-
-    <div class="ui secondary pointing menu">
-        <div class="ui container">
-            <a href="/artworks" class="item">
-                Jart
-            </a>
-            <a class="active item">
-                Home
-            </a>
-            <div class="right item">
-                <% if(!currUser){ %>
-                    <a href="/login" class="item"> Login</a>
-                    <a href="/register" class="item"> Sign Up</a>
-                <% }else{ %>
-                    <a href="">Signed In As <%=currUser.username%></a>
-                    <a href="/logout" class="item">Logout</a>
-                <% } %>
-                <i onclick="toggleHamburger()" class="fas fa-hamburger fa-2x"></i>
-            </div>
-        </div>
-    </div>
+ 
     
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <i class="fas fa-paint-brush fa-2x">Jart</i>
+      </div>
+  
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a href="/artworks" class="navbar-item">
+          Home
+        </a>
+        <a class="navbar-item">
+          About
+        </a>
+        <a class="navbar-item">
+          Contact
+        </a>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+            <% if(!currUser){ %>
+              <a href="/login" class="navbar-item"> Login</a>
+              <a href="/register" class="navbar-item"> Sign Up</a>
+          <% }else{ %>
+              <a href="" class="navbar-item">Signed In As <%=currUser.username%></a>
+              <a href="/logout" class="navbar-item">Logout</a>
+          <% } %>
+            </a>
+        </div>
+      </div>
+    </div>
+</div>
+</nav>
+  

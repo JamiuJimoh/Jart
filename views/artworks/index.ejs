@@ -1,50 +1,47 @@
 <%-include("../partials/header")%>
-<div class="ui container">
-    <div class="ui stackable two column grid "> 
-        <div class="six wide column">
-                <!--sidebar start-->
-            <div class="sidebar" id="sidebar-menu">
-                <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
-                <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
-                <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
-                <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
-                <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
-            </div>
-                <!-- sidebar ends -->
-        </div>
-        <div class="ten wide column"> 
-            <a href="#" class="sidebar-menu-toggler" data-target="#sidebar">
-                <i class="paint brush icon">Jarts</i> 
-            </a>
-            <div class="ui placeholder segment top">
-                <h1 id="segment">"EVERY ARTIST WAS FIRST AN AMATEUR"</h1>
-                <a href="/artworks/new" type="button" class="ui blue button">Share your magic</a>
-            </div>
-            <% foundArtworks.forEach(artwork=>{ %>
-                <div class="ui raised segments" id="post-container">
-                    <div class="ui segment">
-                        <div class="ui top aligned small image">
-                            <a href="/artworks/<%=artwork._id%>" class="ui medium image">
-                                <img src="<%=artwork.image%>">
-                            </a>
-                          </div>
-                        <div class="top aligned individual post">
-                            <h1 class="ui header"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h1>
-                            <h3><%=artwork.content.substring(0, 30)%> ...</h3>
-                            <em><p>By <%=artwork.author.username %></p></em>
-                            <!-- <p>Posted <%=artwork.createdAt%></p> -->
-                            <% if(artwork.likes.length < 2){ %>
-                                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
-                                <span><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
-                            <% }else{ %>
-                                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
-                                <span><i class="far fa-comments"></i> <%= artwork.comments.length %> comments </span> 
-                            <% } %>
-                        </div>
+<div class="section">
+    <div class="container"> 
+
+        <div class="section">
+            <div class="container"> 
+                <div class="box" id="top-box">
+                    <div class="box-item">
+                        <h1 class="title">"EVERY ARTIST WAS FIRST AN AMATEUR"</h1>
+                        <a href="/artworks/new" type="button" class="button is-primary">Share your magic</a>
                     </div>
                 </div>
-            <% }) %>
+
+                <% foundArtworks.forEach(artwork=>{ %>
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-128x128">
+                                    <a href="/artworks/<%=artwork._id%>" class="ui medium image">
+                                        <img src="<%=artwork.image%>">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <h2 class="title" class="ui header"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h2>
+                                    <p>
+                                        <small><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a> <%= moment(artwork.createdAt).fromNow()%></small>
+                                        <br>
+                                        <%=artwork.content.substring(0, 100)%> ...
+                                    </p>
+                                </div>
+                                <% if(artwork.likes.length < 1){ %>
+                                    <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
+                                    <span><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
+                                <% }else{ %>
+                                    <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
+                                    <span><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
+                                <% } %> 
+                            </div>
+                        </article>
+                    </div>
+                <% }) %>
+            </div>  
         </div>
     </div>  
 </div>
