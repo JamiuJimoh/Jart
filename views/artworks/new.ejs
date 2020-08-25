@@ -1,21 +1,22 @@
 <%-include("../partials/header")%>
-<h1 id="segment">Share Your Jart</h1>
-<div id="form" class="ui container">
-    <form class="ui form" action="/artworks" method="POST">
-        <div class="field" >
-            <label for="">Title</label>
-            <input name="title" type="text">
+<div class="section">
+    <div class="container">
+        <div class="box">
+
+            <div class="field">
+                <form class="ui form" action="/artworks" method="POST">
+                    <div class="control" >
+                        <input id="input" class="input one change" name="title" placeholder="New post title here..." type="text">
+                        <input id="input" placeholder="Upload image" class="input two" name="image" type="text">
+                        <textarea id="input" placeholder="Write your post content here..." class="textarea one chang" name="content" id="" cols="30" rows="10"></textarea>
+                        <button type="submit" class="button is-link">Publish</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
-        <div class="field" >
-            <label for="">Image</label>
-            <input name="image" type="text">
-        </div>
-        <div class="field" >
-            <label for="">About</label>
-            <textarea name="content" id="" cols="30" rows="10"></textarea>
-        </div>
-        <button type="submit" class="ui orange button">Share</button>
-    </form>
+    </div>
 </div>
+
 
 <%-include("../partials/footer")%>

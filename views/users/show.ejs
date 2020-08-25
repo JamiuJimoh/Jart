@@ -1,33 +1,59 @@
 <%-include("../partials/header") %>
 
-<div class="ui container segment">
-    <div class="top aligned image">
-        <img class="ui medium circular image" src="<%=user.avatar%>" alt="">
-    <!-- </div> -->
-    <!-- <div class="top aligned individual post"> -->
-        <h1><%=user.firstName%> <%=user.lastName%>(<%=user.username%>)</h1>
+<div class="section">
+    <div class="container">
+
+        <section class="hero is-light is-medium">
+            <div class="hero-body">
+              <div class="container">
+                <article class="media">
+                    <div class="media-left">
+                        <figure>
+                            <img class="profile-image" src="<%=user.avatar%>" alt="">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <h1 class="profile-name"><%=user.firstName%> <%=user.lastName.split("").slice(0,1)%>.</h1>
+                        </div>
+                    </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+        <h1 class="title"><%=user.username%>'s posts</h1>
+        <% artworks.forEach(artwork=>{ %>
+            <div class="box" id="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <a href="/artworks/<%=artwork._id%>" class="ui medium image">
+                                <img src="<%=artwork.image%>">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <h2 class="title"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h2>
+                            <p>
+                                <small><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a> <%= moment(artwork.createdAt).fromNow()%></small>
+                                <br>
+                                <%=artwork.content.substring(0, 100)%> ...
+                            </p>
+                        </div>
+                        <% if(artwork.likes.length < 1){ %>
+                            <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
+                            <span style="padding-left: 20px;"><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
+                        <% }else{ %>
+                            <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
+                            <span style="padding-left: 20px;"><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
+                        <% } %> 
+                    </div>
+                </article>
+            </div>
+        <% }) %>
     </div>
 </div>
-
-<h1><%=user.username%>'s posts</h1>
-<% artworks.forEach(artwork=>{ %>
-    <div class="ui container">
-        <div class="ui raised segments" id="post-container">
-            <div class="ui segment">
-                <div class="ui top aligned small image">
-                    <a href="/artworks/<%=artwork._id%>" class="ui medium image">
-                        <img src="<%=artwork.image%>">
-                    </a>
-                  </div>
-                <div class="top aligned individual post">
-                    <h1 class="ui header"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h1>
-                    <h3><%=artwork.content.substring(0, 30)%> ...</h3>
-                    <em><p>By <%=artwork.author.username %></p></em>
-                    <!-- <p>Posted <%=artwork.createdAt%></p> -->
-                </div>
-            </div>
-        </div>
-    </div>
-<% }) %>
 
 <%-include("../partials/footer") %>

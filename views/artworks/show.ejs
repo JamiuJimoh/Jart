@@ -14,7 +14,12 @@
                     <div class="text-box">
                         <h1 class="title is-2 has-text-black-ter"><%=foundArtwork.title%></h1>
                         <div class="show-date">
-                            <p><a href="/users/<%=foundArtwork.author.id%>">@<%=foundArtwork.author.username%></a>   <span><small><em><%= moment(foundArtwork.createdAt).fromNow() %></em></small></span></p>
+                            <p>
+                                <span id="image" href="" class="">
+                                    <img class="rounded" src="<%=foundArtwork.author.avatar%>">
+                                </span>
+                                <a href="/users/<%=foundArtwork.author.id%>">@<%=foundArtwork.author.username%></a>   <span><small><em><%= moment(foundArtwork.createdAt).fromNow() %></em></small></span>
+                            </p>
                         </div>
                         <p><%=foundArtwork.content%></p>
 
@@ -75,8 +80,8 @@
                 <div class="box">
                     <div class="media">
                             <div class="media-left">
-                                <figure href="" class="image is-32x32">
-                                    <img class="is-rounded" src="<%=comment.author.avatar%>">
+                                <figure href="" class="">
+                                    <img class="rounded-img-comment" src="<%=comment.author.avatar%>">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -87,13 +92,16 @@
                                         <%=comment.text%>
                                     </p>
                                     <% if( currUser && comment.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
-                                    <a href="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>/edit">Edit</a>
-                                    <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                        <a style="padding-left: 20px;" type="submit" href="">Delete</a>
-                                    </form>
+                                        <a href="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>/edit">Edit</a>
                                     <% } %>
                                 </div>
                             </div>
+                            <% if( currUser && comment.author.id.equals(currUser._id) || currUser && currUser.isAdmin){ %>
+                                <form class="inline-btn" action="/artworks/<%=foundArtwork._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                    <button type="submit" class="delete"></button>
+
+                                </form>
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>

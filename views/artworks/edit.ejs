@@ -1,21 +1,25 @@
 <%-include("../partials/header")%>
-<h1 id="segment">Share Your Jart</h1>
-<div id="form" class="ui container">
     <form class="ui form" action="/artworks/<%=artwork._id%>?_method=PUT" method="POST">
-        <div class="field" >
-            <label for="">Title</label>
-            <input name="artwork[title]" type="text" value="<%=artwork.title%>">
+        <div class="section">
+            <div class="container">
+                <div class="box">
+        
+                    <div class="field">
+                        <form class="ui form" action="/artworks" method="POST">
+                            <div class="control" >
+                                <input id="input" class="input one change" name="artwork[title]" value="<%=artwork.title%>" placeholder="New post title here..." type="text">
+                                <input id="input" placeholder="Upload image" class="input two" name="artwork[image]" value="<%=artwork.image%>" type="text">
+                                <textarea id="input" placeholder="Write your post content here..." class="textarea one chang" name="artwork[content]" id="" cols="30" rows="10"><%=artwork.content%></textarea>
+                                <button type="submit" class="button is-link">Publish</button>
+                            </div>
+                        </form>
+                    </div>
+        
+                </div>
+            </div>
         </div>
-        <div class="field" >
-            <label for="">Image</label>
-            <input name="artwork[image]" type="text" value="<%=artwork.image%>">
-        </div>
-        <div class="field" >
-            <label for="">About</label>
-            <textarea name="artwork[content]" id="" cols="30" rows="10"><%=artwork.content%></textarea>
-        </div>
-        <button type="submit" class="ui orange button">Update</button>
     </form>
-</div>
+
+
 
 <%-include("../partials/footer")%>

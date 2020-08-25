@@ -1,37 +1,36 @@
 <%-include("./partials/header") %>
-<div class="container" id="form">
-    <div>
-        <h1 class="title is-3">Log In To Your Jart Account!</h1>
-    </div>
-    <form action="/login" method="POST">
+<div class="container-form">
+  <form id="form" action="/login" method="POST">
+    <h1 class="title is-4">Log In To Your Jart Account!</h1>
+      <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input  class="input" type="text" name="username" placeholder="username">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
         <div class="field">
-            <p class="control has-icons-left has-icons-right">
-              <input  class="input" type="text" name="username" placeholder="username">
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check"></i>
-              </span>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="password" name="password" placeholder="password">
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-              </span>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control">
-              <button class="button is-dark is-fullwidth">
-                Login
-              </button>
-            </p>
-        </div>  
-    </form>
-
+          <p class="control has-icons-left">
+              <input class="input" type="password" name="password" placeholder="password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button class="button is-dark is-fullwidth">
+              Login
+            </button>
+          </p>
+      </div> 
+        <hr>
+        <p class="hr">Don't have an account? <a href="register">Sign up</a></p> 
+  </form>
 </div>
 
 

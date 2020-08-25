@@ -1,35 +1,83 @@
 <%-include("./partials/header") %>
 
-<form action="/register" method="POST">
-    <div>
-        <label for="">First Name</label>
-        <input type="text" name="firstName" placeholder="first name">
-    </div>
-    <div>
-        <label for="">Last Name</label>
-        <input type="text" name="lastName" placeholder="last name">
-    </div>
-    <div>
-        <label for="">Username</label>
-        <input type="text" name="username" placeholder="username">
-    </div>
-    <div>
-        <label for="">Email</label>
-        <input type="email" name="email" placeholder="john@doe.com">
-    </div>
-    <div>
-        <label for="">Avatar Image</label>
-        <input type="text" name="avatar" placeholder="avatar image">
-    </div>
-    <div>
-        <label for="">Password</label>
-        <input type="password" name="password" placeholder="password">
-    </div>
-    <div>
-        <label for="">Admin Code (only for admins)</label>
-        <input type="password" name="adminCode" placeholder="Admin Code">
-    </div>
-    <button>Sign Up</button>
-</form>
+<div class="container-form">
+    <form id="form" action="/register" method="POST">
+        <h1 class="title is-4">Sign Up and Become a Jartist!</h1>
 
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="firstName" placeholder="first name">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="lastName" placeholder="last name">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="username" placeholder="username">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="email" name="email" placeholder="john@doe.com">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="avatar" placeholder="avatar image">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+
+        <div class="field">
+          <p class="control has-icons-left">
+              <input class="input" type="password" name="password" placeholder="password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+              <input class="input" type="password" name="adminCode" placeholder="Admin Code (only for admins)">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+
+
+        <div class="field">
+          <p class="control">
+            <button class="button is-dark is-fullwidth">
+              Sign Up!
+            </button>
+          </p>
+        </div>  
+        <hr>
+        <p class="hr">Already have an account? <a href="login">Log In</a></p> 
+    </form>
+</div>
 <%-include("./partials/footer") %>

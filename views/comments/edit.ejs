@@ -1,12 +1,25 @@
 <%-include("../partials/header")%>
-<h1 id="segment">Edit Comment</h1>
-<div id="form" class="ui container">
-    <form class="ui form" action="/artworks/<%=foundArtwork_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
-        <div class="field" >
-            <textarea name="comment[text]" id="" cols="30" rows="10"><%=comment.text%></textarea>
+
+<form class="ui form" action="/artworks/<%=foundArtwork_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+    <div class="section">
+        <div class="container">
+            <div class="box">
+    
+                <div class="field">
+                    <form class="ui form" action="/artworks" method="POST">
+                        <div class="control" >
+                            <textarea id="input" placeholder="Write your post content here..." class="textarea one chang" name="comment[text]" id="" cols="30" rows="10"><%=comment.text%></textarea>
+                            <button type="submit" class="button is-link">Publish</button>
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
         </div>
-        <button type="submit" class="ui orange button">SUBMIT</button>
-    </form>
-</div>
+    </div>
+</form>
+
+
+
 
 <%-include("../partials/footer")%>
