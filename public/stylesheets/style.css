@@ -1,3 +1,8 @@
+* {
+	color: #131518;
+	line-height: 1.5;
+}
+
 html,
 body {
 	background-color: #eef0f1;
@@ -17,7 +22,7 @@ section.section {
 }
 
 div.box#top-box {
-	background-image: url("https://images.pexels.com/photos/1061640/pexels-photo-1061640.jpeg?auto=compress&cs=tinysrgb&h=350");
+	background-image: url("https://d57439wlqx3vo.cloudfront.net/iblock/07e/07e8072d448813fb13d36cf11acfc836/e3ed31779922959d698a369bc47f30cb.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 100%;
@@ -35,8 +40,9 @@ h2.title {
 	margin-bottom: 3px !important;
 }
 
-h1.title {
-	color: whitesmoke;
+h1.title#title {
+	color: hsl(0, 0%, 93%);
+	text-shadow: 1px 1px 3px #afacac;
 }
 
 article.media {
@@ -49,18 +55,98 @@ article.media {
 	align-items: center;
 }
 
+#form {
+	width: 400px;
+}
+
+h1#welcome {
+	text-align: start;
+}
+
+div.box-item {
+	padding-left: 4px;
+	padding-right: 3px;
+}
+
+.box #show-image {
+	width: 100%;
+}
+
+.box#image-box {
+	margin: 0;
+	padding: 0;
+}
+
+.text-box {
+	margin: 20px 48px 0;
+	font-size: 20px;
+}
+
+h1.title.is-2 {
+	font-weight: bolder;
+}
+
+.show-date {
+	margin-bottom: 7px;
+}
+
+.tag-container {
+	margin: 10px auto;
+}
+
+.show-date span {
+	font-size: large;
+	opacity: 0.8;
+}
+
+i.fas.fa-heart {
+	color: red;
+}
+
+button.tag {
+	border: none;
+	background-color: #e0e0e0;
+}
+
+.inline-btn {
+	display: inline;
+}
+
+div.btn {
+	padding-bottom: 10px;
+}
+
+button#btn {
+	margin: 10px auto;
+	/* display: flex; */
+	justify-content: flex-end;
+}
+
+textarea#textarea {
+	height: 130px;
+}
+
+form#btn {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+
+#textarea {
+	/* display: flex; */
+}
+
 /* ////////////////////// */
 
 @media screen and (min-width: 768px) {
 	.container {
-		width: 700px;
+		width: 800px;
 	}
 }
 
 @media screen and (max-width: 568px) {
 	div.box {
 		margin: 0;
-		width: 443px;
+		width: 450px;
 	}
 
 	section.section {
@@ -73,5 +159,20 @@ article.media {
 
 	div.section {
 		padding: 12px;
+	}
+
+	.text-box {
+		margin: 0;
+		padding: 0 12px 12px;
+		font-size: 18px;
+	}
+
+	h1.title.is-2 {
+		font-size: xx-large;
+	}
+
+	form#btn {
+		margin-bottom: 0;
+		padding-bottom: 0;
 	}
 }
