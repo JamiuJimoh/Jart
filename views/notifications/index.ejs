@@ -1,0 +1,15 @@
+<%-include("../partials/header")%>
+
+<h1>Notifications</h1>
+
+<ul>
+	<% allNotifications.forEach(function(notification) { %>
+	<li>
+		<a href="/artworks/<%= notification.artworkId %>">
+			<%= notification.username %> created a new Jart %>
+		</a>
+	</li>
+	<% }); %>
+</ul>
+
+<%-include("../partials/footer")%>

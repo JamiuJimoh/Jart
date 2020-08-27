@@ -58,13 +58,20 @@ passport.deserializeUser(function(id, done) {
 });
 
 /////USER MIDDLEWARE///////
-app.use((req, res, next) => {
+app.use(async function(req, res, next) {
 	res.locals.currUser = req.user;
+	if (req.user) {
+		try {
+			let user = await User.findById(req.user._id).populate('notifications', null, { isRead: false }).exec();
+			res.locals.notifications = user.notifications.reverse();
+		} catch (err) {
+			console.log(err.message);
+		}
+	}
 	res.locals.error = req.flash('error');
 	res.locals.success = req.flash('success');
 	next();
 });
-
 ///////////////USING ROUTES////////////////////
 app.use(indexRoutes);
 app.use(commentRoutes);

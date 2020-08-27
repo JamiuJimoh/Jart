@@ -42,10 +42,34 @@
   
       <div class="navbar-end">
         <div class="navbar-item">
-            <% if(!currUser){ %>
+          <% if(!currUser){ %>
               <a href="/login" class="navbar-item"> Login</a>
               <a href="/register" class="navbar-item"> Sign Up</a>
           <% }else{ %>
+
+            <div class="dropdown is-left is-hoverable">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu6">
+                  <span>Notifications</span>
+                  <span class="tag">
+                    <%= notifications.length %>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu6" role="menu">
+                <div class="dropdown-content">
+                    <a href="/notifications" class="dropdown-item">
+                      View past notifications
+                    </a>
+                    <% notifications.forEach(function(notification) { %>                          
+                          <a class="dropdown-item" href="/notifications/<%= notification.id %>">
+                              <%= notification.username %> created a new Jart
+                          </a>
+                  <% }); %>
+                </div>
+              </div>
+            </div>
+
               <a href="/users/<%=currUser._id%>" class="navbar-item">Signed In As <%=currUser.username%></a>
               <a href="/logout" class="navbar-item">Logout</a>
           <% } %>

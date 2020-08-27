@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const artworkSchema = new mongoose.Schema({
 	title: String,
 	image: String,
+	imageId: String,
 	content: String,
 	author: {
 		id: {

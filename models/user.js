@@ -13,10 +13,23 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQEE0kk0aJe_buxVA2a7w2hvmpjmHINzi2pRQ&usqp=CAU'
 	},
+	avatarId: String,
 	firstName: String,
 	lastName: String,
 	email: String,
 	bio: String,
+	notifications: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Notification'
+		}
+	],
+	followers: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}
+	],
 	googleId: String,
 	isAdmin: { type: Boolean, default: false }
 });

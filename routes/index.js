@@ -5,6 +5,33 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
 const Artwork = require('../models/artwork');
+const middleware = require('../middleware');
+const Notification = require('../models/notifications');
+
+/////////Image upload config////////////
+const multer = require('multer');
+const storage = multer.diskStorage({
+	filename: function(req, file, callback) {
+		callback(null, Date.now() + file.originalname);
+	}
+});
+const imageFilter = function(req, file, cb) {
+	// accept image files only
+	if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+		return cb(new Error('Only image files are allowed!'), false);
+	}
+	cb(null, true);
+};
+const upload = multer({ storage: storage, fileFilter: imageFilter });
+
+const cloudinary = require('cloudinary');
+cloudinary.config({
+	cloud_name: 'jamiu',
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+//////////////End/////////////////////////////
 
 router.get('/', (req, res) => {
 	res.render('landing');
@@ -99,13 +126,79 @@ router.get('/users/:id/edit', async (req, res) => {
 });
 
 router.put('/users/:id', async (req, res) => {
-	const id = req.params.id;
+	User.findById(req.params.id, async function(err, user) {
+		if (err) {
+			req.flash('error', err.message);
+			res.redirect('back');
+		} else {
+			if (req.file) {
+				try {
+					await cloudinary.v2.uploader.destroy(user.avatarId);
+					const result = await cloudinary.v2.uploader.upload(req.file.path);
+					console.log(result);
+					user.avatarId = result.public_id;
+					user.avatar = result.secure_url;
+				} catch (err) {
+					req.flash('error', err.message);
+					return res.redirect('back');
+				}
+			}
+			console.log(req.body.user);
+			user.firstName = req.body.firstName;
+			user.lastName = req.body.lastName;
+			user.username = req.body.username;
+			user.email = req.body.email;
+			user.bio = req.body.bio;
+			user.save();
+			req.flash('success', 'Successfully updated profile');
+			res.redirect(`/users/${req.params.id}`);
+		}
+	});
+});
+
+///////////////////////////////////////////////
+
+// follow user
+router.get('/follow/:id', middleware.isLoggedIn, async function(req, res) {
 	try {
-		await User.findByIdAndUpdate(id, req.body.user);
-		req.flash('success', 'Successfully updated profile');
-		res.redirect(`/users/${id}`);
+		let user = await User.findById(req.params.id);
+		user.followers.push(req.user._id);
+		user.save();
+		req.flash('success', `Successfully followed ${user.username} !`);
+		res.redirect('/users/' + req.params.id);
 	} catch (err) {
-		req.flash('err', `Sorry, ${err}`);
+		req.flash('error', err.message);
+		res.redirect('back');
+	}
+});
+
+// view all notifications
+router.get('/notifications', middleware.isLoggedIn, async function(req, res) {
+	try {
+		let user = await User.findById(req.user._id)
+			.populate({
+				path: 'notifications',
+				options: { sort: { _id: -1 } }
+			})
+			.exec();
+		let allNotifications = user.notifications;
+		res.render('notifications/index', { allNotifications });
+	} catch (err) {
+		req.flash('error', err.message);
+		res.redirect('back');
+	}
+});
+
+// handle notification
+router.get('/notifications/:id', middleware.isLoggedIn, async function(req, res) {
+	try {
+		let notification = await Notification.findById(req.params.id);
+		notification.isRead = true;
+		notification.save();
+		res.redirect(`/artworks/${notification.artworkId}`);
+	} catch (err) {
+		req.flash('error', err.message);
+		res.redirect('back');
 	}
 });
 
