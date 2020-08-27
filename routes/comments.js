@@ -48,6 +48,7 @@ router.put('/artworks/:id/comments/:comment_id', middleware.checkCommentOwnershi
 router.delete('/artworks/:id/comments/:comment_id', middleware.checkCommentOwnership, async (req, res) => {
 	try {
 		await Comment.findByIdAndDelete(req.params.comment_id);
+		req.flash('success', 'Comment deleted');
 		res.redirect(`/artworks/${req.params.id}`);
 	} catch (err) {
 		res.redirect('back');

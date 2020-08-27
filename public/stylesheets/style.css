@@ -41,8 +41,9 @@ h2.title {
 }
 
 h1.title#title {
-	color: hsl(0, 0%, 93%);
-	text-shadow: 1px 1px 3px #afacac;
+	background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(128, 128, 128));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 article.media {
@@ -69,6 +70,9 @@ article.media {
 h1#welcome {
 	color: white;
 	text-align: start;
+	background: -webkit-linear-gradient(#adadad, rgb(255, 255, 255));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 div.box-item {
@@ -156,6 +160,9 @@ div.hero-body {
 
 h1.profile-name {
 	font-weight: 900;
+	font-size: 900;
+	color: rgb(230, 230, 230);
+	letter-spacing: 1.5px;
 }
 
 section.hero {
@@ -266,6 +273,26 @@ textarea.one {
 	border-radius: 50%;
 }
 
+.google {
+	color: #ffffff;
+	font-weight: 600;
+}
+
+#google {
+	background-color: #cf4332;
+}
+
+.bio {
+	margin-top: 15px;
+	font-size: large;
+	font-style: oblique;
+	color: #e6e6e6;
+}
+
+.box#boxes {
+	margin-top: 18px;
+}
+
 /* ////////////////////// */
 
 @media screen and (min-width: 768px) {
@@ -341,5 +368,23 @@ textarea.one {
 		/* Internet Explorer 10-11 */
 		font-size: xx-large;
 		font-weight: 700;
+	}
+
+	h1.profile-name {
+		font-weight: 700;
+		font-size: x-large;
+		color: rgb(230, 230, 230);
+	}
+
+	.bio {
+		margin-top: 15px;
+		font-size: 15px;
+		font-style: oblique;
+		color: #e6e6e6;
+	}
+
+	.box#boxes {
+		margin-top: 15px;
+		width: 458px;
 	}
 }

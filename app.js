@@ -1,7 +1,6 @@
 //jshint esversion:8
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
@@ -9,6 +8,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
+const flash = require('connect-flash');
+const app = express();
 
 ///////////////////REQUIRE ROUTES////////////////////
 const commentRoutes = require('./routes/comments');
@@ -44,12 +45,23 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+app.use(flash());
+
+passport.serializeUser(function(user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		done(err, user);
+	});
+});
 
 /////USER MIDDLEWARE///////
 app.use((req, res, next) => {
 	res.locals.currUser = req.user;
+	res.locals.error = req.flash('error');
+	res.locals.success = req.flash('success');
 	next();
 });
 

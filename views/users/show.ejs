@@ -14,45 +14,54 @@
                     </div>
                     <div class="media-content">
                         <div class="content">
-                            <h1 class="profile-name"><%=user.firstName%> <%=user.lastName.split("").slice(0,1)%>.</h1>
+                            <h1 class="profile-name"><%=user.firstName%> <%=user.lastName%></h1>
                         </div>
+
+                        <% if( currUser && user._id.equals(currUser._id)){ %>
+                            <a href="/users/<%=user._id%>/edit" class="button is-success">EDIT PROFILE</a>
+                        <%}%>
+                        <p class="bio"><%=user.bio%></p>
                     </div>
                 </article>
               </div>
             </div>
           </section>
 
-        <h1 class="title"><%=user.username%>'s posts</h1>
-        <% artworks.forEach(artwork=>{ %>
-            <div class="box" id="box">
-                <article class="media">
-                    <div class="media-left">
-                        <figure class="image is-128x128">
-                            <a href="/artworks/<%=artwork._id%>" class="ui medium image">
-                                <img src="<%=artwork.image%>">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <h2 class="title"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h2>
-                            <p>
-                                <small><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a> <%= moment(artwork.createdAt).fromNow()%></small>
-                                <br>
-                                <%=artwork.content.substring(0, 100)%> ...
-                            </p>
+          <% if(artworks.length===0){ %>
+            <p>No posts yet</p> 
+          <% } else{ %>
+            <% artworks.forEach(artwork=>{ %>
+                <div class="box" id="boxes">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-128x128">
+                                <a href="/artworks/<%=artwork._id%>" class="ui medium image">
+                                    <img src="<%=artwork.image%>">
+                                </a>
+                            </figure>
                         </div>
-                        <% if(artwork.likes.length < 1){ %>
-                            <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
-                            <span style="padding-left: 20px;"><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
-                        <% }else{ %>
-                            <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
-                            <span style="padding-left: 20px;"><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
-                        <% } %> 
-                    </div>
-                </article>
-            </div>
-        <% }) %>
+                        <div class="media-content">
+                            <div class="content">
+                                <h2 class="title"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h2>
+                                <p>
+                                    <small><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a> <%= moment(artwork.createdAt).fromNow()%></small>
+                                    <br>
+                                    <%=artwork.content.substring(0, 100)%> ...
+                                </p>
+                            </div>
+                            <% if(artwork.likes.length < 1){ %>
+                                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
+                                <span style="padding-left: 20px;"><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
+                            <% }else{ %>
+                                <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
+                                <span style="padding-left: 20px;"><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
+                            <% } %> 
+                        </div>
+                    </article>
+                </div>
+            <% }) %>
+
+          <%}%>
     </div>
 </div>
 

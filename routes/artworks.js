@@ -43,14 +43,16 @@ router.post('/artworks', middleware.isLoggedIn, async (req, res) => {
 	}
 });
 
-router.get('/artworks/:id', async (req, res) => {
+router.get('/artworks/:id', (req, res) => {
 	const id = req.params.id;
-	try {
-		const foundArtwork = await Artwork.findById(id).populate('comments').exec();
-		res.render('artworks/show', { foundArtwork });
-	} catch (err) {
-		console.log(err);
-	}
+	Artwork.findById(id).populate('comments').exec(function(err, foundArtwork) {
+		if (err || !foundArtwork) {
+			req.flash('error', 'Artwork not found');
+			res.redirect('back');
+		} else {
+			res.render('artworks/show', { foundArtwork });
+		}
+	});
 });
 
 router.get('/artworks/:id/edit', middleware.checkArtworkOwnership, async (req, res) => {
