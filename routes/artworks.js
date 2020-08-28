@@ -118,7 +118,6 @@ router.put('/artworks/:id', middleware.checkArtworkOwnership, upload.single('ima
 				try {
 					await cloudinary.v2.uploader.destroy(artwork.imageId);
 					const result = await cloudinary.v2.uploader.upload(req.file.path);
-					console.log(req.file);
 					artwork.imageId = result.public_id;
 					artwork.image = result.secure_url;
 				} catch (err) {

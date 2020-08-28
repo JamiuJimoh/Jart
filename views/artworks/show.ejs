@@ -2,7 +2,6 @@
 
 <div class="section">
     <div class="container"> 
-        
         <div class="section">
             <div class="container"> 
 
@@ -25,9 +24,7 @@
 
                         
                         <form id="btn" action="/artworks/<%= foundArtwork._id %>/like" method="POST">
-                            <% if (currUser && foundArtwork.likes.some(function (like) {
-                                return like.equals(currUser._id)
-                            })) { %>
+                            <% if (currUser && foundArtwork.likes.some(function (like) { return like.equals(currUser._id)})) { %>
                                 <div class="tag-container">
                                     <div class="tags has-addons are-medium">
                                         <button class="tag">

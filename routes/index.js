@@ -72,7 +72,7 @@ router.post('/register', async (req, res) => {
 				req.flash('error', err);
 				return next(err);
 			}
-			req.flash('success', `Welcome to Jart @${newUser.username}`);
+			req.flash('success', `Welcome to Jart @${newUser.username}. Please update your profile`);
 			return res.redirect('/artworks');
 		});
 	} catch (err) {
@@ -125,7 +125,7 @@ router.get('/users/:id/edit', async (req, res) => {
 	}
 });
 
-router.put('/users/:id', async (req, res) => {
+router.put('/users/:id', upload.single('image'), async (req, res) => {
 	User.findById(req.params.id, async function(err, user) {
 		if (err) {
 			req.flash('error', err.message);
@@ -133,9 +133,10 @@ router.put('/users/:id', async (req, res) => {
 		} else {
 			if (req.file) {
 				try {
-					await cloudinary.v2.uploader.destroy(user.avatarId);
+					if (user.avatarId) {
+						await cloudinary.v2.uploader.destroy(user.avatarId);
+					}
 					const result = await cloudinary.v2.uploader.upload(req.file.path);
-					console.log(result);
 					user.avatarId = result.public_id;
 					user.avatar = result.secure_url;
 				} catch (err) {
@@ -143,12 +144,11 @@ router.put('/users/:id', async (req, res) => {
 					return res.redirect('back');
 				}
 			}
-			console.log(req.body.user);
-			user.firstName = req.body.firstName;
-			user.lastName = req.body.lastName;
-			user.username = req.body.username;
-			user.email = req.body.email;
-			user.bio = req.body.bio;
+			user.firstName = req.body.user.firstName;
+			user.lastName = req.body.user.lastName;
+			user.username = req.body.user.username;
+			user.email = req.body.user.email;
+			user.bio = req.body.user.bio;
 			user.save();
 			req.flash('success', 'Successfully updated profile');
 			res.redirect(`/users/${req.params.id}`);
@@ -175,16 +175,20 @@ router.get('/follow/:id', middleware.isLoggedIn, async function(req, res) {
 // view all notifications
 router.get('/notifications', middleware.isLoggedIn, async function(req, res) {
 	try {
-		let user = await User.findById(req.user._id)
+		const user = await User.findById(req.user._id)
 			.populate({
 				path: 'notifications',
+				avatar: 'avatarId',
 				options: { sort: { _id: -1 } }
 			})
 			.exec();
-		let allNotifications = user.notifications;
-		res.render('notifications/index', { allNotifications });
+
+		const notifUser = await User.findOne({ username: user.notifications[0].username });
+		const allNotifications = user.notifications;
+		const avatar = notifUser.avatar;
+		res.render('notifications/index', { allNotifications, avatar });
 	} catch (err) {
-		req.flash('error', err.message);
+		req.flash('error', 'Oops, You do not have any past notifications');
 		res.redirect('back');
 	}
 });
@@ -200,6 +204,20 @@ router.get('/notifications/:id', middleware.isLoggedIn, async function(req, res)
 		req.flash('error', err.message);
 		res.redirect('back');
 	}
+});
+
+router.delete('/notifications/:id', middleware.isLoggedIn, async function(req, res) {
+	try {
+		await Notification.findByIdAndDelete(req.params.id);
+		res.redirect('back');
+	} catch (err) {
+		console.log(err);
+		req.flash('error', err.message);
+	}
+});
+
+router.get('/about', (req, res) => {
+	res.render('about');
 });
 
 module.exports = router;

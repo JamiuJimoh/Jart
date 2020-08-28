@@ -32,7 +32,7 @@
         <a href="/artworks" class="navbar-item">
           Home
         </a>
-        <a class="navbar-item">
+        <a href="/about" class="navbar-item">
           About
         </a>
         <a class="navbar-item">
@@ -80,20 +80,22 @@
 </div>
 </nav>
 
-<div class="container">
-  <div class="section">
-    
     <% if(error && error.length > 0){ %>
-      <div class="notification is-danger is-light">
-        <%=error%>
+      <div class="container">
+        <div class="section">
+          <div class="notification is-danger is-light">
+            <%=error%>
+          </div>
+        </div>
       </div>
     <% } %>
 
     <% if(success && success.length > 0){ %>
-      <div class="notification is-success is-light">
-        <%=success%>
+      <div class="container">
+        <div class="section">
+          <div class="notification is-success is-light">
+            <%=success%>
+          </div>
+        </div>
       </div>
       <% } %>
-
-  </div>
-</div>

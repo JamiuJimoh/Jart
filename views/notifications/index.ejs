@@ -1,15 +1,36 @@
 <%-include("../partials/header")%>
+<div class="segment">
+	<div class="container">
+		<div class="box" id="notif">
+			<h1 class="title">Notifications</h1>
+			<% if(allNotifications.length===0){ %>
+				<p>You do not have any notifications</p>
+			<% }else{%>
+				<% allNotifications.forEach(function(notification) { %>
+				<div class="media">
+					<div class="media-left">
+						<figure href="" class="">
+							<img class="rounded-img-comment" src="<%=avatar%>">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">			
+							<a href="/artworks/<%= notification.artworkId %>">
+								<%= notification.username %> created a new Jart %>
+								<img src="" alt="">
+								<span><small><em> <%= moment(notification.createdAt).fromNow()%></span></em></small>
+							</a>
+								<form class="inline-btn" id="inline-btn" action="/notifications/<%=notification.id%>/?_method=DELETE" method="POST">
+									<button class="delete">Delete</button>
+								</form>
+						</div>
+					</div>
+				</div>
+				<% }); %>
+			<%} %>
+		</div>
+	</div>
+</div>
 
-<h1>Notifications</h1>
-
-<ul>
-	<% allNotifications.forEach(function(notification) { %>
-	<li>
-		<a href="/artworks/<%= notification.artworkId %>">
-			<%= notification.username %> created a new Jart %>
-		</a>
-	</li>
-	<% }); %>
-</ul>
 
 <%-include("../partials/footer")%>
