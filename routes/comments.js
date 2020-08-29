@@ -14,12 +14,10 @@ router.post('/artworks/:id/comments', middleware.isLoggedIn, async (req, res) =>
 		comment.author.id = req.user._id;
 		comment.author.username = req.user.username;
 		comment.author.avatar = req.user.avatar;
-		console.log(req.user);
 		// save comment
 		comment.save();
 		artwork.comments.push(comment);
 		artwork.save();
-		console.log(comment);
 		res.redirect(`/artworks/${artwork._id}`);
 	} catch (err) {
 		res.redirect('/artworks');

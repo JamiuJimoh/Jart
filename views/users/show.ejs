@@ -29,13 +29,13 @@
             </div>
           </section>
 
-          <% if(artworks.length===0){ %>
+            <% if(artworks.length===0){ %>
             <div class="box">
                 <div class="notification">
                     <p>No posts yet</p> 
                 </div>
             </div>
-          <% } else{ %>
+            <% } else{ %>
             <% artworks.forEach(artwork=>{ %>
                 <div class="box" id="boxes">
                     <article class="media">
@@ -67,7 +67,7 @@
                 </div>
             <% }) %>
 
-          <%}%>
+            <%}%>
     </div>
 </div>
 

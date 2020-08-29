@@ -20,12 +20,14 @@ const indexRoutes = require('./routes/index');
 const seedDb = require('./seeds');
 const User = require('./models/user');
 // seedDb();
-
-mongoose.connect('mongodb://localhost:27017/jart', {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false
-});
+const password = process.env.JARTDB;
+mongoose
+	.connect(`mongodb+srv://Jamiu:${password}@cluster0.fudqj.mongodb.net/Jart`, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false
+	})
+	.catch((error) => console.log(error));
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -77,6 +79,9 @@ app.use(indexRoutes);
 app.use(commentRoutes);
 app.use(artworkRoutes);
 
-app.listen(3000, () => {
-	console.log('Server listening on port 3000');
+const port = process.env.PORT || 3000;
+const ip = process.env.IP || '0.0.0.0';
+
+app.listen(port, ip, function() {
+	console.log('Server started on port 3000');
 });

@@ -6,6 +6,8 @@
 html,
 body {
 	background-color: #eef0f1;
+	min-height: 100vh;
+	display: grid;
 }
 
 .segment .container {
@@ -69,7 +71,6 @@ article.media {
 }
 
 #form {
-	width: 400px;
 }
 
 h1#welcome {
