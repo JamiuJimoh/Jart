@@ -340,6 +340,12 @@ footer i {
 	font-size: 24px;
 }
 
+#shown-image {
+	vertical-align: middle;
+	width: 100px;
+	height: 100px;
+}
+
 /* ////////////////////// */
 
 @media screen and (min-width: 768px) {

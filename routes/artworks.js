@@ -73,7 +73,7 @@ router.post('/artworks', middleware.isLoggedIn, upload.single('image'), function
 			for (const follower of user.followers) {
 				let notification = await Notification.create(newNotification);
 				follower.notifications.push(notification);
-				follower.save();
+				await follower.save();
 			}
 
 			//redirect back to campgrounds page
@@ -127,7 +127,7 @@ router.put('/artworks/:id', middleware.checkArtworkOwnership, upload.single('ima
 			}
 			artwork.title = req.body.title;
 			artwork.content = req.body.content;
-			artwork.save();
+			await artwork.save();
 			req.flash('success', 'Successfully updated');
 			res.redirect(`/artworks/${artwork._id}`);
 		}

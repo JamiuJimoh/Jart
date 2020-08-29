@@ -1,1 +1,41 @@
-<a href="artworks" class="">View Magic</a>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" integrity="sha512-ADrqa2PY1TZtb/MoLZIZu/Z/LlPaWQeDMBV73EMwjGam43/JJ5fqW38Rq8LJOVGCDfrJeOMS3Q/wRUVzW5DkjQ==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
+        <title>Jart</title>
+    </head>
+    <body>
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="notification is-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="notification is-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+    
+    <div id="landing-header">
+        <!-- <h1 class="title is-2">Welcome to Jart!</h1> -->
+        <a href="artworks" class="button is-primary is large">View All Artworks</a>
+    </div>
+    
+    <div class="content">
+        <ul class="slideshow">
+            <li><div class="text">“Creativity is contagious, pass it on”</div></li>
+            <li><div class="text">“Every artist was first an amateur”</div></li>
+            <li><div class="text">“To be an artist is to believe in life.”</div></li>
+            <li><div class="text">“Creativity takes courage.”</div></li>
+            <li><div class="text">“A picture is a poem without words”</div></li>
+          </ul>
+    </div>
+
+        
+</body>
+</html>
