@@ -10,7 +10,7 @@
             </div>
             <div class="med">
 
-                <h1><%=foundArtwork.title%></h1>
+                <h2 id="show-title"><%=foundArtwork.title%></h2>
                 <div class="show-date">
                     <p>
                         <span id="image" href="" class="">
@@ -63,7 +63,7 @@
             <div class="media-body">
                 <form action="/artworks/<%=foundArtwork.id%>/comments" method="POST">
                     <div class="form-group">
-                        <h1 class="title is-3">Discussion</h1>
+                        <h2 id="show-title">Discussion</h2>
                         <textarea class="form-control"  name="comment[text]" id="textarea" cols="30" rows="10" placeholder="Write a comment..."></textarea>
                         <div >
                             <button id="comment_btn" class="btn btn-secondary float-right" type="submit">Comment</button>
