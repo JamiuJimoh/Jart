@@ -1,50 +1,28 @@
 <%-include("./partials/header") %>
-<div class="container-form">
-  <form id="form" action="/login" method="POST">
-    <h1 class="title is-4">Log In To Your Jart Account!</h1>
-      <div class="field">
 
-          <p class="control has-icons-left has-icons-right">
-            <input  class="input" type="text" name="username" placeholder="username">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <p class="control has-icons-left">
-              <input class="input" type="password" name="password" placeholder="password">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <p class="control">
-            <button class="button is-dark is-fullwidth">
-              Login
-            </button>
-          </p>
-      </div> 
-
-      <div class="field">
-        <p class="control">
-          <a href="/auth/google" class="button is-fullwidth" id="google">
-            <span class="icon">
-              <i class="fab fa-google google"></i>
-            </span>
-            <span class="google">Sign In with Google</span>
-          </a>
-        </p>
-      </div>
-
-        <hr>
-        <p class="hr">Don't have an account? <a href="register">Sign up</a></p> 
+<div class="container" id="form-container">
+  <form class="form" action="/login" method="POST">
+    <h3 class="form-title">Log In To Your Jart Account!</h3>
+    <div class="form-group">
+      <input  class="form-control" type="text" name="username" placeholder="username">
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" name="password" placeholder="password">
+    </div>
+    <p class="control">
+      <button type="submit" class="btn btn-dark btn-block">Login</button>
+    </p>
+    <p class="control">
+      <a href="/auth/google" class="btn btn-block" id="google">
+        <span class="icon">
+          <i class="fab fa-google google"></i>
+        </span>
+        <span class="google">Sign In with Google</span>
+      </a>
+    </p>
+    <hr>
+    <p class="hr">Don't have an account? <a href="register">Sign up</a></p> 
   </form>
 </div>
-
 
 <%-include("./partials/footer") %>

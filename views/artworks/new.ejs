@@ -1,36 +1,25 @@
 <%-include("../partials/header")%>
-<div class="section">
-    <div class="container">
-        <div class="box">
+<div class="container">
+  <div class="media shadow-sm p-3 bg-white rounded" id="post-media">
+    <div class="media-body">
+      <form action="/artworks" method="POST" enctype="multipart/form-data">
 
-            <div class="field">
-                <form class="ui form" action="/artworks" method="POST" enctype="multipart/form-data">
-                    <div class="control" >
-                        <input id="input" class="input one change" name="artwork[title]" placeholder="New post title here..." type="text">
-                        <div class="file has-name">
-                          <label class="file-label">
-                            <input class="file-input" type="file" accept="image/*" name="image" required>
-                            <span class="file-cta">
-                              <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                              </span>
-                              <span class="file-label">
-                                Upload Image…
-                              </span>
-                            </span>
-                          </label>
-                        </div>
-                        <textarea id="input" placeholder="Write your post content here..." class="textarea one chang" name="artwork[content]" id="" cols="30" rows="10"></textarea>
-                        <button type="submit" class="button is-link">Publish</button>
-                    </div>
-                </form>
-            </div>
-
+        <div class="form-group">
+          <input id="input" class="form-control change" name="artwork[title]" placeholder="New post title here..." type="text">
         </div>
+
+        <div class="form-group">
+          <label class="file-label">
+            <input class="file-input form-control-file" type="file" accept="image/*" name="image" required>
+          </label>
+        </div>
+
+        <textarea id="input" placeholder="Write your post content here..." class="form-control chang" name="artwork[content]" id="" cols="30" rows="10"></textarea>
+        <button type="submit" class="btn btn-secondary float-right">Publish</button>
+
+      </form>
     </div>
+  </div>
 </div>
-
-
-
-
+  
 <%-include("../partials/footer")%>

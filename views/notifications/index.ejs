@@ -1,36 +1,27 @@
 <%-include("../partials/header")%>
-<div class="segment">
-	<div class="container">
-		<div class="box" id="notif">
-			<h1 class="title">Notifications</h1>
-			<% if(allNotifications.length===0){ %>
-				<p>You do not have any notifications</p>
-			<% }else{%>
-				<% allNotifications.forEach(function(notification) { %>
+
+
+<div class="media shadow-sm p-3 bg-white rounded">
+	<div class="media-body">
+		<h3 class="title">Notifications</h3>
+		<% if(allNotifications.length===0){ %>
+			<p>You do not have any notifications</p>
+		<% }else{%>
+			<% allNotifications.forEach(function(notification) { %>
 				<div class="media">
-					<div class="media-left">
-						<figure href="" class="">
-							<img class="rounded-img-comment" src="<%=avatar%>">
-						</figure>
-					</div>
-					<div class="media-content">
-						<div class="content">			
-							<a href="/artworks/<%= notification.artworkId %>">
-								<%= notification.username %> created a new Jart %>
-								<img src="" alt="">
-								<span><small><em> <%= moment(notification.createdAt).fromNow()%></span></em></small>
-							</a>
-								<form class="inline-btn" id="inline-btn" action="/notifications/<%=notification.id%>/?_method=DELETE" method="POST">
-									<button class="delete">Delete</button>
-								</form>
-						</div>
-					</div>
+					<img class="rounded-img-comment" src="<%=avatar%>">
+					<a class="notif" href="/artworks/<%= notification.artworkId %>">
+						<%= notification.username %> created a new Jart %>
+						<img src="" alt="">
+						<span><small><em> <%= moment(notification.createdAt).fromNow()%></span></em></small>
+					</a>
+					<form id="inline-btn" action="/notifications/<%=notification.id%>/?_method=DELETE" method="POST">
+						<button class="delete"><i class="fas fa-trash-alt" id="enlarge"></i></button>
+					</form>
 				</div>
-				<% }); %>
-			<%} %>
-		</div>
+			<% }); %>
+		<%} %>
 	</div>
 </div>
-
 
 <%-include("../partials/footer")%>

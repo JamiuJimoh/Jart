@@ -1,85 +1,49 @@
 <%-include("./partials/header") %>
 
-<div class="container-form">
-    <form id="form" action="/register" method="POST">
-        <h1 class="title is-4">Sign Up and Become a Jartist!</h1>
+<div class="container" id="form-container">
+  <form class="form" id="form" action="/register" method="POST">
+    <h3 class="form-title">Sign Up to Become a Jartist!</h3>
 
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input" type="text" name="firstName" placeholder="first name">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </p>
-        </div>
+    <div class="form-group">
+      <input  class="form-control" type="text" name="firstName" placeholder="first name">
+    </div>
 
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input" type="text" name="lastName" placeholder="last name">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </p>
-        </div>
+    <div class="form-group">
+      <input  class="form-control" type="text" name="lastName" placeholder="last name">
+    </div>
+    
+    <div class="form-group">
+      <input  class="form-control" type="text" name="username" placeholder="username">
+    </div>
 
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input" type="text" name="username" placeholder="username">
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </p>
-        </div>
+    <div class="form-group">
+      <input  class="form-control" type="email" name="email" placeholder="john@doe.com">
+    </div>
 
-        <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input" type="email" name="email" placeholder="john@doe.com">
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-          </p>
-        </div>
+    <div class="form-group">
+      <input class="form-control" type="password" name="password" placeholder="password">
+    </div>
 
-        <div class="field">
-          <p class="control has-icons-left">
-              <input class="input" type="password" name="password" placeholder="password">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
+    <div class="form-group">
+      <input class="form-control" type="password" name="adminCode" placeholder="Admin Code (only for admins)">
+    </div>
 
-        <div class="field">
-          <p class="control has-icons-left">
-              <input class="input" type="password" name="adminCode" placeholder="Admin Code (only for admins)">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-
-
-        <div class="field">
-          <p class="control">
-            <button class="button is-dark is-fullwidth">
-              Sign Up!
-            </button>
-          </p>
-        </div> 
-
-        <div class="field">
-          <p class="control">
-            <a href="/auth/google" class="button is-fullwidth" id="google">
-              <span class="icon">
-                <i class="fab fa-google google"></i>
-              </span>
-              <span class="google">Sign In with Google</span>
-            </a>
-          </p>
-        </div>
-
-        <hr>
-        <p class="hr">Already have an account? <a href="login">Log In</a></p> 
-    </form>
+    <p class="control">
+      <button type="submit" class="btn btn-dark btn-block">Sign Up!</button>
+    </p>
+    <p class="control">
+      <a href="/auth/google" class="btn btn-block" id="google">
+        <span class="icon">
+          <i class="fab fa-google google"></i>
+        </span>
+        <span class="google">Sign In with Google</span>
+      </a>
+    </p>
+    <hr>
+    <p class="hr">Already have an account? <a href="login">Log In</a></p> 
+  </form>
 </div>
+
+
+
 <%-include("./partials/footer") %>

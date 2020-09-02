@@ -1,80 +1,40 @@
 <%-include("../partials/header") %>
-<div class="container-form" id="container-form">
+
+<div class="container" id="form-container">
     <form id="form" action="/users/<%=user._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <h1 class="title is-4">Sign Up and Become a Jartist!</h1>
-
-        <div class="field">
-            <label class="label">First Name</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" name="user[firstName]" value="<%=user.firstName%>" placeholder="first name">
-                <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-                </span>
-            </p>
-        </div>
-
-        <div class="field">
-            <label class="label">Last Name</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" name="user[lastName]" value="<%=user.lastName%>" placeholder="last name">
-                <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-                </span>
-            </p>
-        </div>
-
-        <div class="field">
-            <label class="label">Username</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" value="<%=user.username%>" name="user[username]" placeholder="username">
-                <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-                </span>
-            </p>
-        </div>
-
-        <div class="field">
-            <label class="label">Email</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" type="email" value="<%=user.email%>" name="user[email]" placeholder="john@doe.com">
-                <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-                </span>
-            </p>
-        </div>
-
-        <div class="field">
-            <label class="file-label">
-                <input class="file-input" type="file" accept="image/*" name="image">
-                <span class="file-cta">
-                    <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                    Upload Image…
-                    </span>
-                </span>
-            </label>
-        </div>
-
-        <div class="field">
-            <label class="label">Bio</label>
-            <p class="control has-icons-left has-icons-right">
-                <textarea class="textarea" type="text" name="user[bio]" cols="30" rows="10" placeholder="A short bio ..."><%=user.bio%></textarea>
-                <span class="icon is-small is-right">
-                <i class="fas fa-file-alt"></i>
-                </span>
-            </p>
-        </div>
-
-        <div class="field">
-          <p class="control">
-            <button type="submit" class="button is-dark is-fullwidth">
-              Update Profile
-            </button>
-          </p>
-        </div>  
+        <h3 class="title is-4">Edit Jart Profile</h3>
+  
+      <div class="form-group">
+        <input class="form-control" type="text" name="user[firstName]" value="<%=user.firstName%>" placeholder="first name">
+      </div>
+  
+      <div class="form-group">
+        <input class="form-control" type="text" name="user[lastName]" value="<%=user.lastName%>" placeholder="last name">
+      </div>
+      
+      <div class="form-group">
+        <input class="form-control" type="text" value="<%=user.username%>" name="user[username]" placeholder="username">
+      </div>
+  
+      <div class="form-group">
+        <input class="form-control" type="email" value="<%=user.email%>" name="user[email]" placeholder="john@doe.com">
+      </div>
+  
+      <div class="form-group">
+        <label class="file-label">
+            <input class="file-input form-control-file" type="file" accept="image/*" name="image">
+        </label>
+      </div>
+  
+      <div class="form-group">
+            <textarea id="profile" type="text" name="user[bio]" cols="30" rows="10" placeholder="A short bio ..."><%=user.bio%></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-dark btn-block">
+        Update Profile
+      </button>
     </form>
-</div>
+  </div>
+  
 
 <%-include("../partials/footer") %>

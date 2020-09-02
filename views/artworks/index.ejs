@@ -1,50 +1,40 @@
 <%-include("../partials/header")%>
-<div class="section">
-    <div class="container"> 
 
-        <div class="section">
-            <div class="container"> 
-                <div class="box" id="top-box">
-                    <div class="box-item">
-                        <h1 class="title is-1" id="title">WELCOME TO JART</h1>
-                        <h1 id="welcome" class="title is-3">Follow other Jartists.</h1>
-                        <h1 id="welcome" class="title is-3">Share your Jarts.</h1>
-                        <a href="/artworks/new" type="button" class="button is-medium is-info">Share Jart</a>
-                    </div>
-                </div>
-
-                <% foundArtworks.forEach(artwork=>{ %>
-                    <div class="box is-radiusless" id="show">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-96x96">
-                                    <a href="/artworks/<%=artwork._id%>" id="shown-image" >
-                                        <img src="<%=artwork.image%>">
-                                    </a>
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <h2 class="ui header title"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h2>
-                                    <p>
-                                        <small><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a> <%= moment(artwork.createdAt).fromNow()%></small>
-                                        <br>
-                                        <%=artwork.content.substring(0, 100)%> ...
-                                    </p>
-                                </div>
-                                <% if(artwork.likes.length < 1){ %>
-                                    <span><i class="far fa-heart"></i> <%= artwork.likes.length %> reaction </span> 
-                                    <span style="padding-left: 20px;"><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
-                                <% }else{ %>
-                                    <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> reactions </span> 
-                                    <span style="padding-left: 20px;"><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
-                                <% } %> 
-                            </div>
-                        </article>
-                    </div>
-                <% }) %>
-            </div>  
-        </div>
-    </div>  
+<div class="jumbotron">
+    <div class="jumbo">
+        <h1 id="jumbotron1">WELCOME TO JART</h1>
+        <h3 id="jumbotron2">Follow other Jartists.</h3>
+        <h3 id="jumbotron3">Share your Jarts.</h3>
+        <a href="/artworks/new" type="button" class="btn btn-primary btn-lg">Share Jart</a>
+    </div>
 </div>
+
+<% foundArtworks.forEach(artwork=>{ %>
+
+    <div class="media shadow-sm p-3 bg-white rounded">
+        <a href="/artworks/<%=artwork._id%>">
+            <img id="show-image" class="mr-3" src="<%=artwork.image%>">
+        </a>
+        <div id="media-body" class="media-body">
+            <h4 class="mt-0" href="/artworks/<%=artwork._id%>"><%=artwork.title %></h4>
+            <span><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a></span><span><small><em> <%= moment(artwork.createdAt).fromNow()%></span></em></small>
+            <p><%=artwork.content.substring(0, 100)%> ...</p>
+            <div class="extra">
+            <% if(artwork.likes.length < 1){ %>
+                <span><i class="far fa-heart"></i> <%= artwork.likes.length %> like </span> 
+                <span style="padding-left: 5px;"><i class="far fa-comments"></i> <%= artwork.comments.length %> comment </span> 
+            <% }else{ %>
+                <span><i class="fas fa-heart"></i> <%= artwork.likes.length %> likes </span> 
+                <span style="padding-left: 5px;"><i class="fas fa-comments"></i> <%= artwork.comments.length %> comments </span> 
+            <% } %> 
+        </div>
+        </div>
+        <hr >
+    </div>                      
+<% }) %>
 <%-include("../partials/footer")%>
+
+
+
+
+        

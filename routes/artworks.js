@@ -87,7 +87,7 @@ router.post('/artworks', middleware.isLoggedIn, upload.single('image'), function
 
 router.get('/artworks/:id', (req, res) => {
 	const id = req.params.id;
-	Artwork.findById(id).populate('comments').exec(function(err, foundArtwork) {
+	Artwork.findById(id).populate('comments likes').exec(function(err, foundArtwork) {
 		if (err || !foundArtwork) {
 			req.flash('error', 'Artwork not found');
 			res.redirect('back');
@@ -155,7 +155,7 @@ router.delete('/artworks/:id', middleware.checkArtworkOwnership, (req, res) => {
 /////Likes/////////
 router.post('/artworks/:id/like', middleware.isLoggedIn, async (req, res) => {
 	try {
-		const foundArtwork = await Artwork.findById(req.params.id).populate('comments likes').exec();
+		const foundArtwork = await Artwork.findById(req.params.id);
 		const foundUserLike = await foundArtwork.likes.some((like) => {
 			return like.equals(req.user._id);
 		});
