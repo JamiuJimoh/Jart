@@ -16,7 +16,7 @@
             <img id="show-image" class="mr-3" src="<%=artwork.image%>">
         </a>
         <div id="media-body" class="media-body">
-            <h4 class="mt-0" href="/artworks/<%=artwork._id%>"><%=artwork.title %></h4>
+            <h4 class="mt-0"><a href="/artworks/<%=artwork._id%>"><%=artwork.title %></a></h4>
             <span><a href="/users/<%=artwork.author.id%>">@<%=artwork.author.username%></a></span><span><small><em> <%= moment(artwork.createdAt).fromNow()%></span></em></small>
             <p><%=artwork.content.substring(0, 100)%> ...</p>
             <div class="extra">
